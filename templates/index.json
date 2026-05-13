@@ -11,7 +11,22 @@
   "sections": {
     "hero": {
       "type": "hero",
-      "settings": {}
+      "settings": {
+        "badge": "Impresión 3D Personalizada",
+        "title_line1": "Vos imaginalo...",
+        "title_line2": "nosotros lo hacemos ⭐",
+        "subtitle": "Productos únicos, personalizados y hechos con mucho detalle.",
+        "feature1": "Ideal para cumpleaños",
+        "feature2": "Personalizá con nombre y colores",
+        "feature3": "Materiales seguros y de calidad",
+        "cta_catalog": "Ver catálogo",
+        "catalog_handle": "all",
+        "cta_whatsapp": "Consultá por WhatsApp",
+        "image": "shopify://shop_images/flier1.png",
+        "float1": "Clientes felices",
+        "float2": "Envíos a todo el país",
+        "float3": "Hecho en Argentina"
+      }
     },
     "novedades": {
       "type": "featured-collection",
