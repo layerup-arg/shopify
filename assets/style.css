@@ -1635,17 +1635,18 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     display: block;
     position: absolute;
     top: 100%;
-    left: 0;
-    right: 0;
-    background: rgba(255,255,255,0.82);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    right: 16px;
+    left: auto;
+    width: auto;
+    min-width: 180px;
+    background: var(--white);
     z-index: 200;
-    padding: 12px 16px 20px;
+    padding: 8px;
     overflow-y: auto;
     max-height: 80svh;
-    border-bottom: 1px solid rgba(0,0,0,.08);
-    box-shadow: 0 12px 40px rgba(0,0,0,.10);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 32px rgba(0,0,0,.15);
+    border: 1px solid rgba(0,0,0,.07);
   }
   .nav.open .nav__list {
     flex-direction: column;
