@@ -6,12 +6,12 @@
   if compare_price > price
     assign on_sale = true
   endif
-  assign thirty_days_ago = 'now' | date: '%s' | plus: 0 | minus: 2592000
-  assign created_ts = product.created_at | date: '%s' | plus: 0
   assign is_new = false
-  if created_ts > thirty_days_ago
-    assign is_new = true
-  endif
+  for col in product.collections
+    if col.handle == 'novedades'
+      assign is_new = true
+    endif
+  endfor
   assign variant_id = product.selected_or_first_available_variant.id
   assign available = product.selected_or_first_available_variant.available
 -%}
