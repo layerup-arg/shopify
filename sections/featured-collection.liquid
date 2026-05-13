@@ -1,5 +1,6 @@
 {%- liquid
-  assign collection = collections[section.settings.collection]
+  assign col_handle = section.settings.collection
+  assign col = collections[col_handle]
   assign product_limit = section.settings.products_to_show
 -%}
 
@@ -10,19 +11,30 @@
         <span class="section-label">{{ section.settings.label }}</span>
         <h2 class="section-title">{{ section.settings.title }}</h2>
       </div>
-      {%- if section.settings.show_view_all and collection != blank -%}
-        <a href="{{ collection.url }}" class="btn btn--outline btn--sm">Ver todos →</a>
+      {%- if section.settings.show_view_all and col != blank -%}
+        <a href="{{ col.url }}" class="btn btn--outline btn--sm">Ver todos →</a>
       {%- endif -%}
     </div>
 
     <div class="products__grid{% if section.settings.columns == '3' %} products__grid--featured{% endif %}">
-      {%- if collection != blank and collection.products_count > 0 -%}
-        {%- for product in collection.products limit: product_limit -%}
+      {%- if col != blank and col.products_count > 0 -%}
+        {%- for product in col.products limit: product_limit -%}
           {%- render 'product-card', product: product -%}
         {%- endfor -%}
       {%- else -%}
+        {%- comment -%} Placeholders while the collection is empty {%- endcomment -%}
         {%- for i in (1..product_limit) -%}
-          {%- render 'product-card-placeholder', index: i -%}
+          <article class="product-card">
+            <div class="product-card__media">
+              <div class="product-card__img product-card__img--desk" style="height:220px;">
+                <div style="opacity:.3;font-size:.75rem;color:#fff;">Sin productos aún</div>
+              </div>
+            </div>
+            <div class="product-card__info">
+              <span class="product-card__cat">—</span>
+              <h3 class="product-card__name" style="color:#ccc;">Producto de ejemplo</h3>
+            </div>
+          </article>
         {%- endfor -%}
       {%- endif -%}
     </div>
@@ -36,20 +48,20 @@
     {
       "type": "text",
       "id": "section_id",
-      "label": "ID de sección (para ancla)",
-      "default": "novedades"
+      "label": "ID de sección (ancla)",
+      "default": "productos"
     },
     {
       "type": "text",
       "id": "label",
       "label": "Etiqueta",
-      "default": "Recién llegados"
+      "default": "Colección"
     },
     {
       "type": "text",
       "id": "title",
       "label": "Título",
-      "default": "Novedades"
+      "default": "Productos"
     },
     {
       "type": "collection",
