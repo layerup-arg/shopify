@@ -1332,7 +1332,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .footer__bottom-links a:hover { color: rgba(255,255,255,.7); }
 
 /* ── CAROUSEL ── */
-.carousel-section { padding: 56px 0; }
+.carousel-section { padding: 32px 0; }
 .carousel-section__header {
   display: flex;
   align-items: flex-end;
@@ -1380,7 +1380,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 @media (max-width: 768px) {
   .carousel-track .product-card { flex: 0 0 240px; }
-  .carousel-section { padding: 40px 0; }
+  .carousel-section { padding: 24px 0; }
 }
 @media (max-width: 480px) {
   .carousel-track .product-card { flex: 0 0 200px; }
