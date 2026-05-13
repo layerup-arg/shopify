@@ -28,6 +28,7 @@
       "footer": {
         "type": "footer",
         "settings": {
+          "logo": "shopify://shop_images/logo_c03efa54-0e89-4db3-8db7-4966b7d97c98.png",
           "logo_width": 140,
           "tagline": "Impresiones 3D de calidad hecha en Argentina. Objetos únicos, diseñados para vos.",
           "instagram_url": "",
