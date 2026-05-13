@@ -28,8 +28,8 @@
       </div>
 
       <div class="product-card__badges">
-        {%- assign thirty_days_ago = 'now' | date: '%s' | minus: 2592000 -%}
-        {%- assign created_ts = product.created_at | date: '%s' -%}
+        {%- assign thirty_days_ago = 'now' | date: '%s' | plus: 0 | minus: 2592000 -%}
+        {%- assign created_ts = product.created_at | date: '%s' | plus: 0 -%}
         {%- if created_ts > thirty_days_ago -%}
           <span class="badge badge--new">Nuevo</span>
         {%- endif -%}
