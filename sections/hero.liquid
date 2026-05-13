@@ -89,15 +89,18 @@
 <style>
 .hero {
   background: #f0f4ff;
-  padding: 36px 0 32px;
+  padding: 0;
   overflow: hidden;
+  height: 420px;
 }
 .hero__inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
   align-items: center;
-  max-height: 420px;
+  height: 100%;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .hero__label {
   display: inline-block;
@@ -170,14 +173,14 @@
 .hero__media { position: relative; }
 .hero__img {
   width: 100%;
-  height: 340px;
+  height: 360px;
   border-radius: 20px;
   object-fit: cover;
   display: block;
 }
 .hero__img-placeholder {
   width: 100%;
-  height: 340px;
+  height: 360px;
   background: var(--surface);
   border-radius: 20px;
   display: flex;
@@ -219,11 +222,11 @@
   .hero__float strong { font-size: .75rem; }
 }
 @media (max-width: 768px) {
-  .hero { padding: 28px 0 24px; }
+  .hero { height: auto; padding: 28px 0 24px; }
   .hero__inner {
     grid-template-columns: 1fr;
     gap: 24px;
-    max-height: none;
+    height: auto;
   }
   .hero__img,
   .hero__img-placeholder { height: 220px; }
