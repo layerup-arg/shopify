@@ -1331,6 +1331,61 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .footer__bottom-links a:hover { color: rgba(255,255,255,.7); }
 
+/* ── CAROUSEL ── */
+.carousel-section { padding: 56px 0; }
+.carousel-section__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+.carousel-nav {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.carousel-nav__btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid var(--surface-2);
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--black);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.carousel-nav__btn:hover {
+  border-color: var(--black);
+  background: var(--black);
+  color: var(--white);
+}
+.carousel-track-wrap {
+  overflow: hidden;
+}
+.carousel-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+.carousel-track .product-card {
+  flex: 0 0 280px;
+  scroll-snap-align: start;
+}
+@media (max-width: 768px) {
+  .carousel-track .product-card { flex: 0 0 240px; }
+  .carousel-section { padding: 40px 0; }
+}
+@media (max-width: 480px) {
+  .carousel-track .product-card { flex: 0 0 200px; }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
   .hero__inner { grid-template-columns: 1fr; gap: 40px; }

@@ -7,9 +7,7 @@
         "label": "Recién llegados",
         "title": "Novedades",
         "collection": "novedades",
-        "products_to_show": 4,
-        "columns": "4",
-        "show_view_all": true
+        "products_to_show": 12
       }
     },
     "destacados": {
@@ -19,9 +17,7 @@
         "label": "Los más elegidos",
         "title": "Productos destacados",
         "collection": "frontpage",
-        "products_to_show": 3,
-        "columns": "3",
-        "show_view_all": true
+        "products_to_show": 12
       }
     }
   },
