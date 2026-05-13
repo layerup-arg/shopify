@@ -1,76 +1,111 @@
 {%- comment -%} Usage: render 'product-card', product: product {%- endcomment -%}
 {%- liquid
-  assign first_image = product.featured_image
   assign compare_price = product.compare_at_price
   assign price = product.price
   assign on_sale = false
   if compare_price > price
     assign on_sale = true
   endif
+  assign thirty_days_ago = 'now' | date: '%s' | plus: 0 | minus: 2592000
+  assign created_ts = product.created_at | date: '%s' | plus: 0
+  assign is_new = false
+  if created_ts > thirty_days_ago
+    assign is_new = true
+  endif
+  assign variant_id = product.selected_or_first_available_variant.id
+  assign available = product.selected_or_first_available_variant.available
 -%}
 
-<article class="product-card">
-  <a href="{{ product.url }}" class="product-card__media-link">
-    <div class="product-card__media">
-      <div class="product-card__img" style="background: #1a1a2e;">
-        {%- if first_image != blank -%}
-          <img
-            src="{{ first_image | image_url: width: 600 }}"
-            alt="{{ first_image.alt | escape }}"
-            width="{{ first_image.width }}"
-            height="{{ first_image.height }}"
-            loading="lazy"
-            style="width:100%;height:100%;object-fit:cover;"
-          />
-        {%- else -%}
-          <div class="mock-product mock-product--organizer"></div>
-        {%- endif -%}
-      </div>
+<article class="product-card" data-product-id="{{ product.id }}">
 
-      <div class="product-card__badges">
-        {%- assign thirty_days_ago = 'now' | date: '%s' | plus: 0 | minus: 2592000 -%}
-        {%- assign created_ts = product.created_at | date: '%s' | plus: 0 -%}
-        {%- if created_ts > thirty_days_ago -%}
-          <span class="badge badge--new">Nuevo</span>
-        {%- endif -%}
-        {%- if on_sale -%}
-          {%- assign discount = compare_price | minus: price | times: 100 | divided_by: compare_price -%}
-          <span class="badge badge--sale">−{{ discount }}%</span>
-        {%- endif -%}
+  <!-- ── IMAGE SLIDESHOW ── -->
+  <div class="product-card__media">
+    <a href="{{ product.url }}" class="product-card__img-link" aria-label="{{ product.title }}">
+      <div class="product-card__slideshow">
+        <div class="product-card__slides">
+          {%- if product.images.size > 0 -%}
+            {%- for image in product.images -%}
+              <div class="product-card__slide">
+                <img
+                  src="{{ image | image_url: width: 600 }}"
+                  alt="{{ image.alt | default: product.title | escape }}"
+                  loading="{{ forloop.first | iif: 'eager', 'lazy' }}"
+                  width="600"
+                  height="600"
+                />
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            <div class="product-card__slide product-card__slide--placeholder">
+              <div class="product-card__img product-card__img--desk"></div>
+            </div>
+          {%- endif -%}
+        </div>
       </div>
+    </a>
 
-      <div class="product-card__overlay">
-        <button
-          class="btn btn--primary btn--sm"
-          data-product-id="{{ product.variants.first.id }}"
-          onclick="addToCart({{ product.variants.first.id }})"
-        >
-          Agregar al carrito
-        </button>
-      </div>
-
-      <button class="product-card__wish" aria-label="Guardar">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+    {%- if product.images.size > 1 -%}
+      <button class="product-card__slide-btn product-card__slide-btn--prev" aria-label="Foto anterior">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6"/>
         </svg>
       </button>
-    </div>
-  </a>
+      <button class="product-card__slide-btn product-card__slide-btn--next" aria-label="Foto siguiente">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+      <div class="product-card__dots">
+        {%- for image in product.images -%}
+          <span class="product-card__dot{% if forloop.first %} active{% endif %}"></span>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
 
-  <div class="product-card__info">
+    <div class="product-card__badges">
+      {%- if is_new -%}<span class="badge badge--new">Nuevo</span>{%- endif -%}
+      {%- if on_sale -%}
+        {%- assign discount = compare_price | minus: price | times: 100 | divided_by: compare_price -%}
+        <span class="badge badge--sale">−{{ discount }}%</span>
+      {%- endif -%}
+    </div>
+
+    <button class="product-card__wish" aria-label="Guardar">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- ── INFO ── -->
+  <a href="{{ product.url }}" class="product-card__info">
     {%- if product.type != blank -%}
       <span class="product-card__cat">{{ product.type }}</span>
     {%- elsif product.collections.first -%}
       <span class="product-card__cat">{{ product.collections.first.title }}</span>
     {%- endif -%}
-    <h3 class="product-card__name">
-      <a href="{{ product.url }}">{{ product.title }}</a>
-    </h3>
-    <div class="product-card__pricing">
-      <span class="product-card__price">{{ price | money }}</span>
-      {%- if on_sale -%}
-        <span class="product-card__price-old">{{ compare_price | money }}</span>
-      {%- endif -%}
+    <h3 class="product-card__name">{{ product.title }}</h3>
+    <div class="product-card__bottom">
+      <div class="product-card__pricing">
+        <span class="product-card__price">{{ price | money }}</span>
+        {%- if on_sale -%}
+          <span class="product-card__price-old">{{ compare_price | money }}</span>
+        {%- endif -%}
+      </div>
+      <button
+        class="product-card__cart-btn{% unless available %} disabled{% endunless %}"
+        data-variant-id="{{ variant_id }}"
+        data-available="{{ available }}"
+        aria-label="Agregar al carrito"
+        onclick="event.preventDefault(); event.stopPropagation(); addToCartAjax(this);"
+      >
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+      </button>
     </div>
-  </div>
+  </a>
+
 </article>
