@@ -1655,24 +1655,28 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   }
   .nav.open .nav__list > li > a,
   .nav.open .nav__dropdown-trigger {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    font-size: .95rem;
-    font-weight: 500;
-    padding: 10px 14px;
-    border-radius: var(--radius-sm);
-    color: var(--text-secondary);
+    font-size: .9rem;
+    font-weight: 600;
+    padding: 11px 14px;
+    border-radius: 10px;
+    color: var(--black);
     text-align: left;
     white-space: nowrap;
     background: none;
     border: none;
     font-family: inherit;
     cursor: pointer;
+    letter-spacing: -.01em;
+    transition: background .15s;
   }
   .nav.open .nav__list > li > a:hover,
   .nav.open .nav__dropdown-trigger:hover {
-    background: rgba(0,0,0,.05);
-    color: var(--black);
+    background: #f0f4ff;
+    color: #3b6ef0;
   }
   /* Catálogo dropdown en mobile: colapsable */
   .nav.open .nav__item--dropdown { position: static; }
