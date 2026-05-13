@@ -9,6 +9,10 @@
  */
 {
   "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
     "novedades": {
       "type": "featured-collection",
       "settings": {
@@ -31,6 +35,7 @@
     }
   },
   "order": [
+    "hero",
     "novedades",
     "destacados"
   ]

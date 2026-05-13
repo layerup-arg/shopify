@@ -1,83 +1,234 @@
 <section class="hero">
-  <div class="hero__bg">
-    <div class="hero__grid"></div>
-    <div class="hero__glow hero__glow--1"></div>
-    <div class="hero__glow hero__glow--2"></div>
-  </div>
   <div class="hero__inner container">
     <div class="hero__content">
-      <span class="hero__badge">{{ section.settings.badge }}</span>
+      <span class="hero__label">{{ section.settings.badge }}</span>
       <h1 class="hero__title">
-        {{ section.settings.title | newline_to_br }}
+        {{ section.settings.title_line1 }}
+        <span class="hero__title-accent">{{ section.settings.title_line2 }}</span>
       </h1>
-      <p class="hero__desc">{{ section.settings.description }}</p>
-      <div class="hero__cta">
-        <a href="{{ section.settings.cta_primary_url }}" class="btn btn--primary">{{ section.settings.cta_primary_label }}</a>
-        <a href="{{ section.settings.cta_secondary_url }}" class="btn btn--ghost">{{ section.settings.cta_secondary_label }}</a>
+      <p class="hero__subtitle">{{ section.settings.subtitle }}</p>
+
+      <div class="hero__features">
+        {%- if section.settings.feature1 != blank -%}
+          <div class="hero__feature">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+            <span>{{ section.settings.feature1 }}</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.feature2 != blank -%}
+          <div class="hero__feature">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+            <span>{{ section.settings.feature2 }}</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.feature3 != blank -%}
+          <div class="hero__feature">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>{{ section.settings.feature3 }}</span>
+          </div>
+        {%- endif -%}
       </div>
-      <div class="hero__stats">
-        <div class="stat">
-          <strong>{{ section.settings.stat1_value }}</strong>
-          <span>{{ section.settings.stat1_label }}</span>
-        </div>
-        <div class="stat__divider"></div>
-        <div class="stat">
-          <strong>{{ section.settings.stat2_value }}</strong>
-          <span>{{ section.settings.stat2_label }}</span>
-        </div>
-        <div class="stat__divider"></div>
-        <div class="stat">
-          <strong>{{ section.settings.stat3_value }}</strong>
-          <span>{{ section.settings.stat3_label }}</span>
-        </div>
+
+      <div class="hero__ctas">
+        <a href="{{ routes.collections_url }}/{{ section.settings.catalog_handle }}" class="btn hero__btn-catalog">
+          {{ section.settings.cta_catalog }}
+        </a>
+        <a href="https://wa.me/5491140928282?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n%20de%20LayerUp" class="btn hero__btn-wa" target="_blank" rel="noopener">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          {{ section.settings.cta_whatsapp }}
+        </a>
       </div>
     </div>
-    <div class="hero__visual">
-      <div class="hero__product-card hero__product-card--main">
-        <div class="product-visual product-visual--lamp">
-          <div class="pv-lamp">
-            <div class="pv-lamp__shade"></div>
-            <div class="pv-lamp__body"></div>
-            <div class="pv-lamp__base"></div>
-            <div class="pv-lamp__glow"></div>
+
+    <div class="hero__media">
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 900 }}"
+          alt="{{ section.settings.image.alt | default: shop.name }}"
+          class="hero__img"
+          loading="eager"
+        />
+      {%- else -%}
+        <div class="hero__img-placeholder">
+          <svg width="80" height="80" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24" opacity="0.25">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+          </svg>
+          <p>Subí una foto desde el editor del tema</p>
+        </div>
+      {%- endif -%}
+
+      <div class="hero__floats">
+        {%- if section.settings.float1 != blank -%}
+          <div class="hero__float">
+            <span class="hero__float-icon">⭐</span>
+            <div>
+              <strong>{{ section.settings.float1 }}</strong>
+              <span class="hero__float-stars">★★★★★</span>
+            </div>
           </div>
-        </div>
-        <div class="hero__product-info">
-          <span class="product-tag">Lámpara Minkowski</span>
-          <span class="product-price">$8.500</span>
-        </div>
-      </div>
-      <div class="hero__product-card hero__product-card--sm hero__product-card--top">
-        <div class="product-visual product-visual--keychain">
-          <div class="pv-keychain">
-            <div class="pv-keychain__shape"></div>
-            <div class="pv-keychain__ring"></div>
+        {%- endif -%}
+        {%- if section.settings.float2 != blank -%}
+          <div class="hero__float">
+            <span class="hero__float-icon">🚚</span>
+            <div><strong>{{ section.settings.float2 }}</strong></div>
           </div>
-        </div>
-        <div class="hero__product-info">
-          <span class="product-tag">Llavero custom</span>
-          <span class="product-price">$2.200</span>
-        </div>
-      </div>
-      <div class="hero__product-card hero__product-card--sm hero__product-card--bottom">
-        <div class="product-visual product-visual--figure">
-          <div class="pv-figure">
-            <div class="pv-figure__body"></div>
-            <div class="pv-figure__head"></div>
+        {%- endif -%}
+        {%- if section.settings.float3 != blank -%}
+          <div class="hero__float">
+            <span class="hero__float-icon">🩷</span>
+            <div><strong>{{ section.settings.float3 }}</strong></div>
           </div>
-        </div>
-        <div class="hero__product-info">
-          <span class="product-tag">Figura gamer</span>
-          <span class="product-price">$4.800</span>
-        </div>
+        {%- endif -%}
       </div>
     </div>
-  </div>
-  <div class="hero__scroll">
-    <span>Scroll</span>
-    <div class="hero__scroll-line"></div>
   </div>
 </section>
+
+<style>
+.hero {
+  background: #f0f4ff;
+  padding: 56px 0 48px;
+  overflow: hidden;
+}
+.hero__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+.hero__label {
+  display: inline-block;
+  background: #dce8ff;
+  color: #2d5dd4;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 99px;
+  margin-bottom: 20px;
+}
+.hero__title {
+  font-size: clamp(1.9rem, 3.5vw, 2.9rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--black);
+  margin: 0 0 16px;
+}
+.hero__title-accent { color: #3b6ef0; display: block; }
+.hero__subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 0 0 28px;
+  line-height: 1.6;
+}
+.hero__features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 36px;
+}
+.hero__feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: .82rem;
+  color: var(--text-secondary);
+  max-width: 130px;
+  line-height: 1.4;
+}
+.hero__feature svg { flex-shrink: 0; margin-top: 1px; color: #3b6ef0; }
+.hero__ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero__btn-catalog {
+  background: #3b6ef0;
+  border-color: #3b6ef0;
+  color: #fff;
+  font-weight: 700;
+}
+.hero__btn-catalog:hover { background: #2d5dd4; border-color: #2d5dd4; color: #fff; }
+.hero__btn-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid #25d366;
+  color: #1a9e4d;
+  background: transparent;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  padding: 10px 20px;
+  font-size: .9rem;
+  text-decoration: none;
+  transition: var(--transition);
+  cursor: pointer;
+}
+.hero__btn-wa:hover { background: #25d366; color: #fff; }
+
+/* Media side */
+.hero__media { position: relative; }
+.hero__img {
+  width: 100%;
+  border-radius: 24px;
+  object-fit: cover;
+  display: block;
+  aspect-ratio: 4/3;
+}
+.hero__img-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: var(--surface);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--text-tertiary);
+  font-size: .85rem;
+}
+
+/* Floating badge cards */
+.hero__floats {
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.hero__float {
+  background: #fff;
+  border-radius: 14px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.10);
+  min-width: 170px;
+}
+.hero__float strong { display: block; font-size: .8rem; line-height: 1.3; color: var(--black); }
+.hero__float-stars { font-size: .7rem; color: #f59e0b; letter-spacing: 1px; display: block; }
+.hero__float-icon { font-size: 1.5rem; line-height: 1; flex-shrink: 0; }
+
+@media (max-width: 900px) {
+  .hero__floats { right: 8px; }
+  .hero__float { min-width: 140px; }
+}
+@media (max-width: 768px) {
+  .hero { padding: 40px 0 32px; }
+  .hero__inner { grid-template-columns: 1fr; gap: 32px; }
+  .hero__floats {
+    position: static;
+    transform: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .hero__float { min-width: 0; flex: 1 1 140px; }
+}
+</style>
 
 {% schema %}
 {
@@ -86,70 +237,89 @@
     {
       "type": "text",
       "id": "badge",
-      "label": "Badge",
-      "default": "✦ Impresión FDM & Resina"
-    },
-    {
-      "type": "textarea",
-      "id": "title",
-      "label": "Título (usar saltos de línea)",
-      "default": "Diseño que\ntoma forma\ncapa por capa."
-    },
-    {
-      "type": "textarea",
-      "id": "description",
-      "label": "Descripción",
-      "default": "Fabricamos objetos únicos con impresión 3D profesional. Personalizá cualquier diseño o elegí del catálogo."
+      "label": "Badge superior",
+      "default": "Impresión 3D Personalizada"
     },
     {
       "type": "text",
-      "id": "cta_primary_label",
-      "label": "Botón primario — texto",
+      "id": "title_line1",
+      "label": "Título línea 1",
+      "default": "Regalos y souvenirs que hacen felices"
+    },
+    {
+      "type": "text",
+      "id": "title_line2",
+      "label": "Título línea 2 (color acento)",
+      "default": "a los chicos ⭐"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Productos únicos, personalizados y hechos con mucho detalle."
+    },
+    {
+      "type": "text",
+      "id": "feature1",
+      "label": "Característica 1",
+      "default": "Ideal para cumpleaños"
+    },
+    {
+      "type": "text",
+      "id": "feature2",
+      "label": "Característica 2",
+      "default": "Personalizá con nombre y colores"
+    },
+    {
+      "type": "text",
+      "id": "feature3",
+      "label": "Característica 3",
+      "default": "Materiales seguros y de calidad"
+    },
+    {
+      "type": "text",
+      "id": "cta_catalog",
+      "label": "Texto botón catálogo",
       "default": "Ver catálogo"
     },
     {
-      "type": "url",
-      "id": "cta_primary_url",
-      "label": "Botón primario — URL"
+      "type": "text",
+      "id": "catalog_handle",
+      "label": "Handle colección catálogo",
+      "default": "all"
     },
     {
       "type": "text",
-      "id": "cta_secondary_label",
-      "label": "Botón secundario — texto",
-      "default": "Cómo funciona →"
+      "id": "cta_whatsapp",
+      "label": "Texto botón WhatsApp",
+      "default": "Consultá por WhatsApp"
     },
     {
-      "type": "url",
-      "id": "cta_secondary_url",
-      "label": "Botón secundario — URL"
+      "type": "image_picker",
+      "id": "image",
+      "label": "Foto principal"
     },
     {
-      "type": "header",
-      "content": "Estadísticas"
+      "type": "text",
+      "id": "float1",
+      "label": "Tarjeta flotante 1",
+      "default": "Más de 1200 chicos felices"
     },
     {
-      "type": "text", "id": "stat1_value", "label": "Stat 1 valor", "default": "+1.200"
+      "type": "text",
+      "id": "float2",
+      "label": "Tarjeta flotante 2",
+      "default": "Envíos a todo el país"
     },
     {
-      "type": "text", "id": "stat1_label", "label": "Stat 1 etiqueta", "default": "productos vendidos"
-    },
-    {
-      "type": "text", "id": "stat2_value", "label": "Stat 2 valor", "default": "48h"
-    },
-    {
-      "type": "text", "id": "stat2_label", "label": "Stat 2 etiqueta", "default": "tiempo de entrega"
-    },
-    {
-      "type": "text", "id": "stat3_value", "label": "Stat 3 valor", "default": "100%"
-    },
-    {
-      "type": "text", "id": "stat3_label", "label": "Stat 3 etiqueta", "default": "personalizable"
+      "type": "text",
+      "id": "float3",
+      "label": "Tarjeta flotante 3",
+      "default": "Hecho en Argentina"
     }
   ],
   "presets": [
-    {
-      "name": "Hero principal"
-    }
+    { "name": "Hero" }
   ]
 }
 {% endschema %}
