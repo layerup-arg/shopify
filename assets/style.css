@@ -194,6 +194,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(0,0,0,.06);
   transition: box-shadow var(--transition);
+  overflow: visible;
 }
 .header.scrolled { box-shadow: var(--shadow-md); }
 .header__inner {
@@ -1632,12 +1633,16 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .nav { display: none; }
   .nav.open {
     display: block;
-    position: fixed;
-    inset: var(--header-h) 0 0 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 100svh;
     background: var(--white);
     z-index: 200;
     padding: 24px;
     overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,.12);
   }
   .nav.open .nav__list {
     flex-direction: column;
