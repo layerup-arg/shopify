@@ -1,0 +1,74 @@
+{%- comment -%} Usage: render 'product-card', product: product {%- endcomment -%}
+{%- liquid
+  assign first_image = product.featured_image
+  assign compare_price = product.compare_at_price
+  assign price = product.price
+  assign on_sale = false
+  if compare_price > price
+    assign on_sale = true
+  endif
+-%}
+
+<article class="product-card">
+  <a href="{{ product.url }}" class="product-card__media-link">
+    <div class="product-card__media">
+      <div class="product-card__img" style="background: #1a1a2e;">
+        {%- if first_image != blank -%}
+          <img
+            src="{{ first_image | image_url: width: 600 }}"
+            alt="{{ first_image.alt | escape }}"
+            width="{{ first_image.width }}"
+            height="{{ first_image.height }}"
+            loading="lazy"
+            style="width:100%;height:100%;object-fit:cover;"
+          />
+        {%- else -%}
+          <div class="mock-product mock-product--organizer"></div>
+        {%- endif -%}
+      </div>
+
+      <div class="product-card__badges">
+        {%- if product.created_at > 'now' | date: '%s' | minus: 2592000 | date: '%Y-%m-%dT%H:%M:%SZ' -%}
+          <span class="badge badge--new">Nuevo</span>
+        {%- endif -%}
+        {%- if on_sale -%}
+          {%- assign discount = compare_price | minus: price | times: 100 | divided_by: compare_price -%}
+          <span class="badge badge--sale">−{{ discount }}%</span>
+        {%- endif -%}
+      </div>
+
+      <div class="product-card__overlay">
+        <button
+          class="btn btn--primary btn--sm"
+          data-product-id="{{ product.variants.first.id }}"
+          onclick="addToCart({{ product.variants.first.id }})"
+        >
+          Agregar al carrito
+        </button>
+      </div>
+
+      <button class="product-card__wish" aria-label="Guardar">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+        </svg>
+      </button>
+    </div>
+  </a>
+
+  <div class="product-card__info">
+    {%- if product.type != blank -%}
+      <span class="product-card__cat">{{ product.type }}</span>
+    {%- elsif product.collections.first -%}
+      <span class="product-card__cat">{{ product.collections.first.title }}</span>
+    {%- endif -%}
+    <h3 class="product-card__name">
+      <a href="{{ product.url }}">{{ product.title }}</a>
+    </h3>
+    <div class="product-card__pricing">
+      <span class="product-card__price">{{ price | money }}</span>
+      {%- if on_sale -%}
+        <span class="product-card__price-old">{{ compare_price | money }}</span>
+      {%- endif -%}
+    </div>
+  </div>
+</article>

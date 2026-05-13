@@ -1,0 +1,18 @@
+{%- comment -%} Placeholder card for when no collection is set {%- endcomment -%}
+{%- assign colors = 'lamp2,gaming,keychain,desk' | split: ',' -%}
+{%- assign color = colors[index | modulo: 4] -%}
+
+<article class="product-card">
+  <div class="product-card__media">
+    <div class="product-card__img product-card__img--{{ color }}">
+      <div class="mock-product mock-product--organizer"></div>
+    </div>
+  </div>
+  <div class="product-card__info">
+    <span class="product-card__cat">Categoría</span>
+    <h3 class="product-card__name">Nombre del producto</h3>
+    <div class="product-card__pricing">
+      <span class="product-card__price">$0.000</span>
+    </div>
+  </div>
+</article>

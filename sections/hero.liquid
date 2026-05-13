@@ -1,0 +1,155 @@
+<section class="hero">
+  <div class="hero__bg">
+    <div class="hero__grid"></div>
+    <div class="hero__glow hero__glow--1"></div>
+    <div class="hero__glow hero__glow--2"></div>
+  </div>
+  <div class="hero__inner container">
+    <div class="hero__content">
+      <span class="hero__badge">{{ section.settings.badge }}</span>
+      <h1 class="hero__title">
+        {{ section.settings.title | newline_to_br }}
+      </h1>
+      <p class="hero__desc">{{ section.settings.description }}</p>
+      <div class="hero__cta">
+        <a href="{{ section.settings.cta_primary_url }}" class="btn btn--primary">{{ section.settings.cta_primary_label }}</a>
+        <a href="{{ section.settings.cta_secondary_url }}" class="btn btn--ghost">{{ section.settings.cta_secondary_label }}</a>
+      </div>
+      <div class="hero__stats">
+        <div class="stat">
+          <strong>{{ section.settings.stat1_value }}</strong>
+          <span>{{ section.settings.stat1_label }}</span>
+        </div>
+        <div class="stat__divider"></div>
+        <div class="stat">
+          <strong>{{ section.settings.stat2_value }}</strong>
+          <span>{{ section.settings.stat2_label }}</span>
+        </div>
+        <div class="stat__divider"></div>
+        <div class="stat">
+          <strong>{{ section.settings.stat3_value }}</strong>
+          <span>{{ section.settings.stat3_label }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero__visual">
+      <div class="hero__product-card hero__product-card--main">
+        <div class="product-visual product-visual--lamp">
+          <div class="pv-lamp">
+            <div class="pv-lamp__shade"></div>
+            <div class="pv-lamp__body"></div>
+            <div class="pv-lamp__base"></div>
+            <div class="pv-lamp__glow"></div>
+          </div>
+        </div>
+        <div class="hero__product-info">
+          <span class="product-tag">Lámpara Minkowski</span>
+          <span class="product-price">$8.500</span>
+        </div>
+      </div>
+      <div class="hero__product-card hero__product-card--sm hero__product-card--top">
+        <div class="product-visual product-visual--keychain">
+          <div class="pv-keychain">
+            <div class="pv-keychain__shape"></div>
+            <div class="pv-keychain__ring"></div>
+          </div>
+        </div>
+        <div class="hero__product-info">
+          <span class="product-tag">Llavero custom</span>
+          <span class="product-price">$2.200</span>
+        </div>
+      </div>
+      <div class="hero__product-card hero__product-card--sm hero__product-card--bottom">
+        <div class="product-visual product-visual--figure">
+          <div class="pv-figure">
+            <div class="pv-figure__body"></div>
+            <div class="pv-figure__head"></div>
+          </div>
+        </div>
+        <div class="hero__product-info">
+          <span class="product-tag">Figura gamer</span>
+          <span class="product-price">$4.800</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero__scroll">
+    <span>Scroll</span>
+    <div class="hero__scroll-line"></div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge",
+      "default": "✦ Impresión FDM & Resina"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Título (usar saltos de línea)",
+      "default": "Diseño que\ntoma forma\ncapa por capa."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Descripción",
+      "default": "Fabricamos objetos únicos con impresión 3D profesional. Personalizá cualquier diseño o elegí del catálogo."
+    },
+    {
+      "type": "text",
+      "id": "cta_primary_label",
+      "label": "Botón primario — texto",
+      "default": "Ver catálogo"
+    },
+    {
+      "type": "url",
+      "id": "cta_primary_url",
+      "label": "Botón primario — URL"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_label",
+      "label": "Botón secundario — texto",
+      "default": "Cómo funciona →"
+    },
+    {
+      "type": "url",
+      "id": "cta_secondary_url",
+      "label": "Botón secundario — URL"
+    },
+    {
+      "type": "header",
+      "content": "Estadísticas"
+    },
+    {
+      "type": "text", "id": "stat1_value", "label": "Stat 1 valor", "default": "+1.200"
+    },
+    {
+      "type": "text", "id": "stat1_label", "label": "Stat 1 etiqueta", "default": "productos vendidos"
+    },
+    {
+      "type": "text", "id": "stat2_value", "label": "Stat 2 valor", "default": "48h"
+    },
+    {
+      "type": "text", "id": "stat2_label", "label": "Stat 2 etiqueta", "default": "tiempo de entrega"
+    },
+    {
+      "type": "text", "id": "stat3_value", "label": "Stat 3 valor", "default": "100%"
+    },
+    {
+      "type": "text", "id": "stat3_label", "label": "Stat 3 etiqueta", "default": "personalizable"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero principal"
+    }
+  ]
+}
+{% endschema %}

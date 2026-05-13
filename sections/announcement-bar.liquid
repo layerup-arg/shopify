@@ -1,0 +1,41 @@
+{%- if section.settings.show_bar -%}
+  <div class="announcement-bar">
+    <p>{{ section.settings.text }} <a href="{{ section.settings.link_url }}">{{ section.settings.link_label }}</a></p>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Barra de anuncios",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_bar",
+      "label": "Mostrar barra",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Texto",
+      "default": "🔧 Impresión 3D a pedido · Envíos a todo el país ·"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Texto del enlace",
+      "default": "Ver catálogo completo →"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "URL del enlace"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Barra de anuncios"
+    }
+  ]
+}
+{% endschema %}

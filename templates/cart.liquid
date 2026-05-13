@@ -1,0 +1,72 @@
+<div class="cart-page section">
+  <div class="container" style="max-width:760px;">
+    <div class="section-header">
+      <h1 class="section-title">Tu carrito</h1>
+    </div>
+
+    {%- if cart.item_count == 0 -%}
+      <div style="text-align:center;padding:80px 0;">
+        <p style="color:var(--text-tertiary);margin-bottom:24px;">Tu carrito está vacío.</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary">Ver productos</a>
+      </div>
+    {%- else -%}
+      {%- form 'cart', cart -%}
+        <div class="cart-items">
+          {%- for item in cart.items -%}
+            <div class="cart-item">
+              <div class="cart-item__img">
+                {%- if item.image -%}
+                  <img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.image.alt | escape }}" loading="lazy" />
+                {%- endif -%}
+              </div>
+              <div class="cart-item__info">
+                <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title }}</a>
+                {%- unless item.variant.title == 'Default Title' -%}
+                  <span class="cart-item__variant">{{ item.variant.title }}</span>
+                {%- endunless -%}
+                <div class="cart-item__qty">
+                  <a href="{{ routes.cart_change_url }}?id={{ item.key }}&quantity={{ item.quantity | minus: 1 }}" class="qty-btn">−</a>
+                  <span>{{ item.quantity }}</span>
+                  <a href="{{ routes.cart_change_url }}?id={{ item.key }}&quantity={{ item.quantity | plus: 1 }}" class="qty-btn">+</a>
+                </div>
+              </div>
+              <div class="cart-item__price">
+                <span>{{ item.final_line_price | money }}</span>
+                <a href="{{ routes.cart_change_url }}?id={{ item.key }}&quantity=0" class="cart-item__remove">Eliminar</a>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <div class="cart-summary">
+          <div class="cart-summary__row">
+            <span>Subtotal</span>
+            <strong>{{ cart.total_price | money }}</strong>
+          </div>
+          <p style="font-size:.8rem;color:var(--text-tertiary);margin:8px 0 24px;">Los envíos e impuestos se calculan en el checkout.</p>
+          <button type="submit" name="checkout" class="btn btn--primary" style="width:100%;justify-content:center;padding:16px;font-size:1rem;">
+            Finalizar compra →
+          </button>
+        </div>
+      {%- endform -%}
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+.cart-items { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
+.cart-item { display: flex; gap: 20px; padding: 20px; background: var(--white); border: 1px solid var(--surface-2); border-radius: var(--radius-lg); }
+.cart-item__img { width: 80px; height: 80px; border-radius: var(--radius-md); overflow: hidden; background: var(--surface); flex-shrink: 0; }
+.cart-item__img img { width: 100%; height: 100%; object-fit: cover; }
+.cart-item__info { flex: 1; }
+.cart-item__title { font-weight: 600; display: block; margin-bottom: 4px; }
+.cart-item__variant { font-size: .8rem; color: var(--text-tertiary); display: block; margin-bottom: 10px; }
+.cart-item__qty { display: flex; align-items: center; gap: 12px; }
+.qty-btn { width: 28px; height: 28px; border-radius: 50%; background: var(--surface); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .9rem; cursor: pointer; }
+.cart-item__price { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.cart-item__price span { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+.cart-item__remove { font-size: .75rem; color: var(--text-tertiary); cursor: pointer; }
+.cart-item__remove:hover { color: #e74c3c; }
+.cart-summary { background: var(--white); border: 1px solid var(--surface-2); border-radius: var(--radius-lg); padding: 28px; }
+.cart-summary__row { display: flex; justify-content: space-between; font-size: 1.1rem; margin-bottom: 4px; }
+</style>

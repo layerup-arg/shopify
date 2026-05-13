@@ -1,0 +1,127 @@
+<div class="product-page section">
+  <div class="container">
+    <div class="product-page__inner">
+
+      <!-- GALLERY -->
+      <div class="product-page__gallery">
+        <div class="product-page__main-img">
+          {%- if product.featured_image -%}
+            <img
+              id="ProductMainImage"
+              src="{{ product.featured_image | image_url: width: 800 }}"
+              alt="{{ product.featured_image.alt | escape }}"
+              width="{{ product.featured_image.width }}"
+              height="{{ product.featured_image.height }}"
+            />
+          {%- endif -%}
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="product-page__thumbs">
+            {%- for image in product.images -%}
+              <button class="product-page__thumb{% if forloop.first %} active{% endif %}"
+                onclick="document.getElementById('ProductMainImage').src='{{ image | image_url: width: 800 }}'">
+                <img src="{{ image | image_url: width: 120 }}" alt="{{ image.alt | escape }}" loading="lazy" />
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- INFO -->
+      <div class="product-page__info">
+        {%- if product.type != blank -%}
+          <span class="product-card__cat">{{ product.type }}</span>
+        {%- endif -%}
+        <h1 class="product-page__title">{{ product.title }}</h1>
+
+        <div class="product-page__pricing">
+          {%- if product.compare_at_price > product.price -%}
+            <span class="product-card__price">{{ product.price | money }}</span>
+            <span class="product-card__price-old">{{ product.compare_at_price | money }}</span>
+            {%- assign discount = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+            <span class="badge badge--sale">−{{ discount }}%</span>
+          {%- else -%}
+            <span class="product-card__price">{{ product.price | money }}</span>
+          {%- endif -%}
+        </div>
+
+        {%- if product.description != blank -%}
+          <div class="product-page__desc">{{ product.description }}</div>
+        {%- endif -%}
+
+        {%- form 'product', product, id: 'ProductForm' -%}
+          {%- unless product.has_only_default_variant -%}
+            {%- for option in product.options_with_values -%}
+              <div class="product-page__option">
+                <label class="product-page__option-label">{{ option.name }}</label>
+                <div class="product-page__option-values">
+                  {%- for value in option.values -%}
+                    <label class="product-page__swatch">
+                      <input type="radio" name="{{ option.name }}" value="{{ value }}"
+                        {% if option.selected_value == value %}checked{% endif %} />
+                      <span>{{ value }}</span>
+                    </label>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endunless -%}
+
+          <select name="id" style="display:none">
+            {%- for variant in product.variants -%}
+              <option value="{{ variant.id }}"
+                {% if variant == product.selected_or_first_available_variant %}selected{% endif %}
+                {% unless variant.available %}disabled{% endunless %}>
+                {{ variant.title }}
+              </option>
+            {%- endfor -%}
+          </select>
+
+          <div class="product-page__actions">
+            <button type="submit" name="add" class="btn btn--primary"
+              {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+              {%- if product.selected_or_first_available_variant.available -%}
+                Agregar al carrito
+              {%- else -%}
+                Sin stock
+              {%- endif -%}
+            </button>
+          </div>
+        {%- endform -%}
+
+        <div class="product-page__meta">
+          {%- if product.vendor != blank -%}
+            <span>Marca: <strong>{{ product.vendor }}</strong></span>
+          {%- endif -%}
+          {%- unless product.tags == empty -%}
+            <span>Tags: {{ product.tags | join: ', ' }}</span>
+          {%- endunless -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.product-page__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.product-page__main-img { border-radius: var(--radius-lg); overflow: hidden; background: var(--surface); aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
+.product-page__main-img img { width: 100%; height: 100%; object-fit: cover; }
+.product-page__thumbs { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.product-page__thumb { width: 72px; height: 72px; border-radius: var(--radius-sm); overflow: hidden; border: 2px solid transparent; cursor: pointer; transition: var(--transition); }
+.product-page__thumb.active, .product-page__thumb:hover { border-color: var(--black); }
+.product-page__thumb img { width: 100%; height: 100%; object-fit: cover; }
+.product-page__title { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; margin: 8px 0 16px; }
+.product-page__pricing { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+.product-page__pricing .product-card__price { font-size: 1.5rem; }
+.product-page__desc { color: var(--text-secondary); line-height: 1.75; margin-bottom: 28px; }
+.product-page__option { margin-bottom: 20px; }
+.product-page__option-label { display: block; font-size: .8rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--text-tertiary); margin-bottom: 10px; }
+.product-page__option-values { display: flex; gap: 8px; flex-wrap: wrap; }
+.product-page__swatch input { display: none; }
+.product-page__swatch span { display: block; padding: 8px 16px; border: 1.5px solid var(--surface-2); border-radius: var(--radius-sm); font-size: .85rem; font-weight: 500; cursor: pointer; transition: var(--transition); }
+.product-page__swatch input:checked + span { border-color: var(--black); background: var(--black); color: var(--white); }
+.product-page__actions { margin: 28px 0 24px; }
+.product-page__actions .btn { width: 100%; justify-content: center; padding: 16px; font-size: 1rem; }
+.product-page__meta { display: flex; flex-direction: column; gap: 6px; font-size: .82rem; color: var(--text-tertiary); }
+@media (max-width: 768px) { .product-page__inner { grid-template-columns: 1fr; gap: 32px; } }
+</style>

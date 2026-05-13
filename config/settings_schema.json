@@ -1,0 +1,53 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Layer Up",
+    "theme_version": "1.0.0",
+    "theme_author": "Layer Up Impresiones 3D",
+    "theme_documentation_url": "https://github.com/layerup-arg/shopify",
+    "theme_support_url": "https://github.com/layerup-arg/shopify"
+  },
+  {
+    "name": "General",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
+    ]
+  },
+  {
+    "name": "Tipografía",
+    "settings": [
+      {
+        "type": "select",
+        "id": "body_font_size",
+        "label": "Tamaño de fuente base",
+        "options": [
+          { "value": "14px", "label": "Pequeño (14px)" },
+          { "value": "16px", "label": "Normal (16px)" },
+          { "value": "18px", "label": "Grande (18px)" }
+        ],
+        "default": "16px"
+      }
+    ]
+  },
+  {
+    "name": "Colores",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Color acento",
+        "default": "#00c8f0"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_secondary",
+        "label": "Color acento secundario",
+        "default": "#ff6b35"
+      }
+    ]
+  }
+]

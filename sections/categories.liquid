@@ -1,0 +1,148 @@
+<section class="categories section" id="categorias">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">{{ section.settings.label }}</span>
+      <h2 class="section-title">{{ section.settings.title }}</h2>
+    </div>
+    <div class="categories__grid">
+      {%- for block in section.blocks -%}
+        <a href="{{ block.settings.url }}" class="cat-card{% if block.settings.wide %} cat-card--wide{% endif %}{% if block.settings.accent %} cat-card--accent{% endif %}" {{ block.shopify_attributes }}>
+          {%- unless block.settings.accent -%}
+            <div class="cat-card__bg cat-card__bg--{{ block.settings.color_key }}"></div>
+          {%- endunless -%}
+          <div class="cat-card__content">
+            <span class="cat-card__icon">{{ block.settings.icon }}</span>
+            <h3>{{ block.settings.name }}</h3>
+            <span class="cat-card__count">{{ block.settings.count }}</span>
+          </div>
+          <span class="cat-card__arrow">→</span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Categorías",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Etiqueta",
+      "default": "Explorar"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Navegá por categoría"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Categoría",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Emoji ícono",
+          "default": "🎮"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Nombre",
+          "default": "Gaming"
+        },
+        {
+          "type": "text",
+          "id": "count",
+          "label": "Cantidad de productos",
+          "default": "34 productos"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Enlace"
+        },
+        {
+          "type": "text",
+          "id": "color_key",
+          "label": "Color (gaming / llaveros / lamparas / escritorio / souvenirs / coleccionables)",
+          "default": "gaming"
+        },
+        {
+          "type": "checkbox",
+          "id": "wide",
+          "label": "Ancho doble",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "accent",
+          "label": "Estilo acento (oscuro)",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Categorías",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "icon": "🎮", "name": "Gaming", "count": "34 productos",
+            "color_key": "gaming", "wide": true
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "icon": "🔑", "name": "Llaveros", "count": "58 productos",
+            "color_key": "llaveros"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "icon": "💡", "name": "Lámparas", "count": "21 productos",
+            "color_key": "lamparas"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "icon": "🖥️", "name": "Escritorio", "count": "27 productos",
+            "color_key": "escritorio"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "icon": "🎁", "name": "Souvenirs", "count": "44 productos",
+            "color_key": "souvenirs"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "icon": "🏆", "name": "Coleccionables", "count": "19 productos",
+            "color_key": "coleccionables"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "icon": "✏️", "name": "Personalizados", "count": "Tu diseño",
+            "accent": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

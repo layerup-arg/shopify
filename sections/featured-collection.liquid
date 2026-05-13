@@ -1,0 +1,91 @@
+{%- liquid
+  assign collection = collections[section.settings.collection]
+  assign product_limit = section.settings.products_to_show
+-%}
+
+<section class="products section" id="{{ section.settings.section_id }}">
+  <div class="container">
+    <div class="section-header section-header--row">
+      <div>
+        <span class="section-label">{{ section.settings.label }}</span>
+        <h2 class="section-title">{{ section.settings.title }}</h2>
+      </div>
+      {%- if section.settings.show_view_all and collection != blank -%}
+        <a href="{{ collection.url }}" class="btn btn--outline btn--sm">Ver todos →</a>
+      {%- endif -%}
+    </div>
+
+    <div class="products__grid{% if section.settings.columns == '3' %} products__grid--featured{% endif %}">
+      {%- if collection != blank and collection.products_count > 0 -%}
+        {%- for product in collection.products limit: product_limit -%}
+          {%- render 'product-card', product: product -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..product_limit) -%}
+          {%- render 'product-card-placeholder', index: i -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Colección destacada",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "ID de sección (para ancla)",
+      "default": "novedades"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Etiqueta",
+      "default": "Recién llegados"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Novedades"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Colección"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Cantidad de productos",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columnas",
+      "options": [
+        { "value": "4", "label": "4 columnas" },
+        { "value": "3", "label": "3 columnas" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Mostrar enlace Ver todos",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Colección destacada"
+    }
+  ]
+}
+{% endschema %}

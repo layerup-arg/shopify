@@ -1,0 +1,165 @@
+<section class="about section" id="nosotros">
+  <div class="container">
+    <div class="about__inner">
+      <div class="about__visual">
+        <div class="about__img-wrap">
+          {%- if section.settings.image != blank -%}
+            <img
+              src="{{ section.settings.image | image_url: width: 800 }}"
+              alt="{{ section.settings.image.alt | escape }}"
+              loading="lazy"
+              style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"
+            />
+          {%- else -%}
+            <div class="about__mockup">
+              <div class="printer-mockup">
+                <div class="printer-mockup__frame">
+                  <div class="printer-mockup__bed"></div>
+                  <div class="printer-mockup__head"></div>
+                  <div class="printer-mockup__object"></div>
+                  <div class="printer-mockup__layers"></div>
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+        <div class="about__badge-float">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+          </svg>
+          {{ section.settings.badge_text }}
+        </div>
+      </div>
+
+      <div class="about__content">
+        <span class="section-label">{{ section.settings.label }}</span>
+        <h2 class="section-title">{{ section.settings.title }}</h2>
+        <p>{{ section.settings.paragraph_1 }}</p>
+        <p>{{ section.settings.paragraph_2 }}</p>
+        <ul class="about__features">
+          {%- for block in section.blocks -%}
+            <li {{ block.shopify_attributes }}>
+              <span class="about__feature-icon">{{ block.settings.icon }}</span>
+              <div>
+                <strong>{{ block.settings.title }}</strong>
+                <span>{{ block.settings.description }}</span>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+        <a href="{{ section.settings.cta_url }}" class="btn btn--primary">{{ section.settings.cta_label }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Nosotros",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen (opcional, si no se muestra animación)"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge flotante",
+      "default": "Impreso en Argentina"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Etiqueta",
+      "default": "Quiénes somos"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Donde la tecnología encuentra el diseño"
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_1",
+      "label": "Párrafo 1",
+      "default": "En Layer Up combinamos impresoras FDM y de resina de alta precisión con diseño propio para crear objetos funcionales, únicos y con identidad."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_2",
+      "label": "Párrafo 2",
+      "default": "Cada producto sale de nuestra taller artesanal con control de calidad riguroso. Si lo podés imaginar, lo podemos imprimir."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Texto del botón",
+      "default": "Conocer más"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "URL del botón"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Característica",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Emoji",
+          "default": "⚡"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Producción rápida"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Descripción",
+          "default": "Mayoría de pedidos listos en 24–48hs"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Nosotros",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "⚡",
+            "title": "Producción rápida",
+            "description": "Mayoría de pedidos listos en 24–48hs"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "🎨",
+            "title": "+30 colores de filamento",
+            "description": "PLA, PETG, TPU, Resina"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "📦",
+            "title": "Envíos a todo el país",
+            "description": "Correo Argentino y Andreani"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

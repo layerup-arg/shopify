@@ -1,0 +1,81 @@
+<section class="promo-banner section">
+  <div class="container">
+    <div class="promo-banner__inner">
+      <div class="promo-banner__bg"></div>
+      <div class="promo-banner__content">
+        <span class="section-label section-label--light">{{ section.settings.label }}</span>
+        <h2>{{ section.settings.title }}</h2>
+        <p>{{ section.settings.description }}</p>
+        <div class="promo-banner__cta">
+          <a href="{{ section.settings.cta_primary_url }}" class="btn btn--white">{{ section.settings.cta_primary_label }}</a>
+          <a href="{{ section.settings.cta_secondary_url }}" class="btn btn--ghost-white">{{ section.settings.cta_secondary_label }}</a>
+        </div>
+      </div>
+      <div class="promo-banner__visual">
+        <div class="promo-visual">
+          <div class="promo-visual__layer promo-visual__layer--1"></div>
+          <div class="promo-visual__layer promo-visual__layer--2"></div>
+          <div class="promo-visual__layer promo-visual__layer--3"></div>
+          <div class="promo-visual__layer promo-visual__layer--4"></div>
+          <div class="promo-visual__layer promo-visual__layer--5"></div>
+          <div class="promo-visual__dot promo-visual__dot--1"></div>
+          <div class="promo-visual__dot promo-visual__dot--2"></div>
+          <div class="promo-visual__dot promo-visual__dot--3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Banner personalización",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Etiqueta",
+      "default": "Servicio especial"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "¿Tenés un diseño propio?"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Descripción",
+      "default": "Subí tu archivo STL o contanos tu idea. Lo imprimimos con filamento premium en más de 30 colores."
+    },
+    {
+      "type": "text",
+      "id": "cta_primary_label",
+      "label": "Botón primario",
+      "default": "Solicitar presupuesto"
+    },
+    {
+      "type": "url",
+      "id": "cta_primary_url",
+      "label": "URL botón primario"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_label",
+      "label": "Botón secundario",
+      "default": "Ver materiales →"
+    },
+    {
+      "type": "url",
+      "id": "cta_secondary_url",
+      "label": "URL botón secundario"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banner personalización"
+    }
+  ]
+}
+{% endschema %}

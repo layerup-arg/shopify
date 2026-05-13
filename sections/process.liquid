@@ -1,0 +1,63 @@
+<section class="process section">
+  <div class="container">
+    <div class="section-header section-header--center">
+      <span class="section-label">{{ section.settings.label }}</span>
+      <h2 class="section-title">{{ section.settings.title }}</h2>
+    </div>
+    <div class="process__steps">
+      {%- for block in section.blocks -%}
+        <div class="process__step" {{ block.shopify_attributes }}>
+          <div class="process__step-num">0{{ forloop.index }}</div>
+          <div class="process__step-icon">{{ block.settings.icon }}</div>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.description }}</p>
+        </div>
+        {%- unless forloop.last -%}
+          <div class="process__connector"></div>
+        {%- endunless -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Proceso",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Etiqueta",
+      "default": "Simple y rápido"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "¿Cómo funciona?"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Paso",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Emoji", "default": "🛒" },
+        { "type": "text", "id": "title", "label": "Título", "default": "Elegís o diseñás" },
+        { "type": "textarea", "id": "description", "label": "Descripción", "default": "Seleccioná del catálogo o envianos tu archivo STL." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Proceso",
+      "blocks": [
+        { "type": "step", "settings": { "icon": "🛒", "title": "Elegís o diseñás", "description": "Seleccioná del catálogo o envianos tu archivo STL / idea." } },
+        { "type": "step", "settings": { "icon": "🎨", "title": "Configurás", "description": "Color, material, tamaño y acabado. Todo a tu medida." } },
+        { "type": "step", "settings": { "icon": "🖨️", "title": "Imprimimos", "description": "Producción en 24–48hs con control de calidad en cada capa." } },
+        { "type": "step", "settings": { "icon": "📬", "title": "Te llega", "description": "Envío seguro a cualquier punto del país con seguimiento." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
