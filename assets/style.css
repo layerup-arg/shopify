@@ -1409,6 +1409,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   grid-template-columns: repeat(4, 1fr);
   gap: 32px;
 }
+.footer__links--contact-only {
+  grid-template-columns: 1fr;
+  justify-items: end;
+}
 .footer__col h4 {
   font-size: .72rem;
   font-weight: 700;

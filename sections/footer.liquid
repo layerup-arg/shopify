@@ -30,27 +30,7 @@
       </div>
     </div>
 
-    <div class="footer__links">
-      {%- for i in (1..4) -%}
-        {%- liquid
-          assign col_title_key = 'col' | append: i | append: '_title'
-          assign col_menu_key  = 'col' | append: i | append: '_menu'
-          assign col_title = section.settings[col_title_key]
-          assign col_menu  = section.settings[col_menu_key]
-        -%}
-        {%- if col_title != blank -%}
-          <div class="footer__col">
-            <h4>{{ col_title }}</h4>
-            <ul>
-              {%- if col_menu != blank -%}
-                {%- for link in linklists[col_menu].links -%}
-                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-                {%- endfor -%}
-              {%- endif -%}
-            </ul>
-          </div>
-        {%- endif -%}
-      {%- endfor -%}
+    <div class="footer__links footer__links--contact-only">
 
       <div class="footer__col footer__col--contact">
         <h4>Contacto</h4>
