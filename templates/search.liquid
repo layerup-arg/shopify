@@ -1,0 +1,66 @@
+<div class="search-page">
+
+  <!-- ── SEARCH BAR ── -->
+  <div class="search-page__hero">
+    <div class="container">
+      <h1 class="search-page__title">
+        {%- if search.performed and search.results_count > 0 -%}
+          {{ search.results_count }} resultado{{ search.results_count | pluralize: '', 's' }} para
+          <em>"{{ search.terms }}"</em>
+        {%- elsif search.performed -%}
+          Sin resultados para <em>"{{ search.terms }}"</em>
+        {%- else -%}
+          ¿Qué estás buscando?
+        {%- endif -%}
+      </h1>
+
+      <form action="{{ routes.search_url }}" method="get" class="search-form" role="search">
+        <input type="hidden" name="type" value="product" />
+        <div class="search-form__wrap">
+          <svg class="search-form__icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/>
+          </svg>
+          <input
+            type="search"
+            name="q"
+            class="search-form__input"
+            value="{{ search.terms | escape }}"
+            placeholder="Buscar productos..."
+            autocomplete="off"
+            autofocus
+          />
+          {%- if search.terms != blank -%}
+            <a href="{{ routes.search_url }}" class="search-form__clear" aria-label="Limpiar búsqueda">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </a>
+          {%- endif -%}
+          <button type="submit" class="search-form__btn">Buscar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── RESULTS ── -->
+  <div class="container search-page__results">
+    {%- if search.performed -%}
+      {%- if search.results_count > 0 -%}
+        <div class="collection-grid">
+          {%- for item in search.results -%}
+            {%- if item.object_type == 'product' -%}
+              {%- render 'product-card', product: item -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <div class="search-page__empty">
+          <p>No encontramos productos para <strong>"{{ search.terms }}"</strong>.</p>
+          <p>Intentá con otro término o explorá el catálogo completo.</p>
+          <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary">Ver todos los productos</a>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+
+</div>
