@@ -1509,6 +1509,35 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .carousel-track .product-card { flex: 0 0 200px; }
 }
 
+/* ── FOOTER CONTACT ICONS ── */
+.footer__contact-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+.footer__contact-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-size: .85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.7);
+  border: 1px solid rgba(255,255,255,.08);
+}
+.footer__contact-btn:hover {
+  transform: translateX(4px);
+  color: var(--white);
+}
+.footer__contact-btn--wa:hover  { background: rgba(37,211,102,.15); border-color: rgba(37,211,102,.3); color: #25d366; }
+.footer__contact-btn--ig:hover  { background: rgba(193,53,132,.15); border-color: rgba(193,53,132,.3); color: #e1306c; }
+.footer__contact-btn--mail:hover { background: rgba(0,200,240,.15);  border-color: rgba(0,200,240,.3);  color: var(--cyan); }
+
 /* ── NAV DROPDOWN ── */
 .nav__item { position: relative; }
 .nav__item--dropdown { list-style: none; }
