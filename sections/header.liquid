@@ -19,11 +19,69 @@
     <nav class="nav" id="nav">
       <ul class="nav__list">
         {%- for link in section.settings.menu.links -%}
-          <li>
-            <a href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>
-              {{ link.title }}
-            </a>
-          </li>
+          {%- if link.title == 'Catálogo' or link.title == 'Catalogo' or link.handle == 'catalogo' -%}
+            <li class="nav__item nav__item--dropdown" id="catalogDropdownItem">
+              <button class="nav__dropdown-trigger" id="catalogTrigger" aria-expanded="false" aria-haspopup="true">
+                {{ link.title }}
+                <svg class="nav__chevron" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </button>
+              <div class="nav__dropdown" id="catalogDropdown" role="menu">
+                <div class="nav__dropdown-inner">
+                  <div class="nav__dropdown-group">
+                    <span class="nav__dropdown-label">Destacados</span>
+                    {%- if collections['novedades'] != empty -%}
+                      <a href="{{ collections['novedades'].url }}" class="nav__dropdown-link" role="menuitem">
+                        <span class="nav__dropdown-icon">✦</span>
+                        Novedades
+                        <span class="nav__dropdown-count">{{ collections['novedades'].products_count }}</span>
+                      </a>
+                    {%- endif -%}
+                    {%- if collections['frontpage'] != empty -%}
+                      <a href="{{ collections['frontpage'].url }}" class="nav__dropdown-link" role="menuitem">
+                        <span class="nav__dropdown-icon">⭐</span>
+                        Productos destacados
+                        <span class="nav__dropdown-count">{{ collections['frontpage'].products_count }}</span>
+                      </a>
+                    {%- endif -%}
+                  </div>
+                  {%- assign other_cols = collections | where: 'published', true -%}
+                  {%- assign has_others = false -%}
+                  {%- for col in collections -%}
+                    {%- unless col.handle == 'novedades' or col.handle == 'frontpage' or col.handle == 'all' -%}
+                      {%- assign has_others = true -%}
+                    {%- endunless -%}
+                  {%- endfor -%}
+                  {%- if has_others -%}
+                    <div class="nav__dropdown-divider"></div>
+                    <div class="nav__dropdown-group">
+                      <span class="nav__dropdown-label">Categorías</span>
+                      {%- for col in collections -%}
+                        {%- unless col.handle == 'novedades' or col.handle == 'frontpage' or col.handle == 'all' -%}
+                          <a href="{{ col.url }}" class="nav__dropdown-link" role="menuitem">
+                            <span class="nav__dropdown-icon">·</span>
+                            {{ col.title }}
+                            <span class="nav__dropdown-count">{{ col.products_count }}</span>
+                          </a>
+                        {%- endunless -%}
+                      {%- endfor -%}
+                    </div>
+                  {%- endif -%}
+                  <div class="nav__dropdown-divider"></div>
+                  <a href="{{ routes.all_products_collection_url }}" class="nav__dropdown-link nav__dropdown-link--all" role="menuitem">
+                    Ver todos los productos →
+                  </a>
+                </div>
+              </div>
+            </li>
+          {%- else -%}
+            <li class="nav__item">
+              <a href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>
+                {{ link.title }}
+              </a>
+            </li>
+          {%- endif -%}
         {%- endfor -%}
       </ul>
     </nav>

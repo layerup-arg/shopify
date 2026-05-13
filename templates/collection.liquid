@@ -1,34 +1,53 @@
-<div class="collection-page section">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-label">Categoría</span>
-      <h1 class="section-title">{{ collection.title }}</h1>
-      {%- if collection.description != blank -%}
-        <p style="color:var(--text-secondary);margin-top:12px;">{{ collection.description }}</p>
-      {%- endif -%}
-    </div>
+{%- paginate collection.products by 48 -%}
 
+<div class="collection-page">
+
+  <!-- ── HEADER ── -->
+  <div class="collection-page__header">
+    <div class="container">
+      <nav class="collection-page__breadcrumb">
+        <a href="{{ routes.root_url }}">Inicio</a>
+        <span>›</span>
+        <span>{{ collection.title }}</span>
+      </nav>
+      <div class="collection-page__title-row">
+        <div>
+          <h1 class="collection-page__title">{{ collection.title }}</h1>
+          {%- if collection.description != blank -%}
+            <p class="collection-page__desc">{{ collection.description }}</p>
+          {%- endif -%}
+        </div>
+        <span class="collection-page__count">{{ collection.products_count }} producto{{ collection.products_count | pluralize: '', 's' }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── GRID ── -->
+  <div class="container">
     {%- if collection.products_count == 0 -%}
-      <p style="color:var(--text-tertiary);text-align:center;padding:64px 0;">
-        No hay productos en esta categoría todavía.
-      </p>
+      <div class="collection-page__empty">
+        <p>No hay productos en esta categoría todavía.</p>
+        <a href="{{ routes.root_url }}" class="btn btn--primary">Volver al inicio</a>
+      </div>
     {%- else -%}
-      <div class="products__grid">
+      <div class="collection-grid">
         {%- for product in collection.products -%}
           {%- render 'product-card', product: product -%}
         {%- endfor -%}
       </div>
 
       {%- if paginate.pages > 1 -%}
-        <div class="pagination" style="display:flex;justify-content:center;gap:8px;margin-top:48px;">
+        <div class="pagination">
           {%- if paginate.previous -%}
             <a href="{{ paginate.previous.url }}" class="btn btn--outline btn--sm">← Anterior</a>
           {%- endif -%}
           {%- for part in paginate.parts -%}
             {%- if part.is_link -%}
               <a href="{{ part.url }}" class="btn btn--outline btn--sm">{{ part.title }}</a>
-            {%- else -%}
+            {%- elsif part.title == paginate.current_page -%}
               <span class="btn btn--primary btn--sm">{{ part.title }}</span>
+            {%- else -%}
+              <span class="pagination__ellipsis">…</span>
             {%- endif -%}
           {%- endfor -%}
           {%- if paginate.next -%}
@@ -38,6 +57,7 @@
       {%- endif -%}
     {%- endif -%}
   </div>
+
 </div>
 
-{%- paginate collection.products by 12 -%}{%- endpaginate -%}
+{%- endpaginate -%}
