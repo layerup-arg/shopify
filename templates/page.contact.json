@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "contact": {
+      "type": "contact-page",
+      "settings": {
+        "label": "Hablemos",
+        "title": "Contacto",
+        "description": "Estamos para ayudarte. Escribinos por el canal que prefieras."
+      }
+    }
+  },
+  "order": ["contact"]
+}

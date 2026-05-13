@@ -1509,6 +1509,77 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .carousel-track .product-card { flex: 0 0 200px; }
 }
 
+/* ── CONTACT PAGE ── */
+.contact-page__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.contact-page__desc {
+  color: var(--text-secondary);
+  margin-top: 12px;
+  font-size: .95rem;
+  line-height: 1.7;
+}
+.contact-page__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 24px;
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--surface-2);
+  background: var(--white);
+  text-decoration: none;
+  color: var(--black);
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+.contact-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+.contact-card__icon {
+  width: 52px; height: 52px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+.contact-card--wa  .contact-card__icon { background: #e8faf0; color: #25d366; }
+.contact-card--ig  .contact-card__icon { background: #fce4ec; color: #e1306c; }
+.contact-card--mail .contact-card__icon { background: var(--cyan-dim); color: var(--cyan); }
+.contact-card:hover .contact-card__icon { transform: scale(1.08); }
+.contact-card__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.contact-card__info strong {
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.contact-card__info span {
+  font-size: .85rem;
+  color: var(--text-secondary);
+}
+.contact-card__arrow {
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  transition: transform var(--transition);
+}
+.contact-card:hover .contact-card__arrow { transform: translateX(4px); color: var(--black); }
+.contact-card--wa:hover  { border-color: #25d366; }
+.contact-card--ig:hover  { border-color: #e1306c; }
+.contact-card--mail:hover { border-color: var(--cyan); }
+
 /* ── FOOTER CONTACT ICONS ── */
 .footer__contact-icons {
   display: flex;
