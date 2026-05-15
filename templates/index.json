@@ -47,11 +47,23 @@
         "collection": "frontpage",
         "products_to_show": 12
       }
+    },
+    "featured_collection_ebwVhf": {
+      "type": "featured-collection",
+      "name": "Carrusel de colección",
+      "settings": {
+        "section_id": "tercera",
+        "label": "Productos",
+        "title": "Todos",
+        "collection": "",
+        "products_to_show": 15
+      }
     }
   },
   "order": [
     "hero",
     "novedades",
-    "destacados"
+    "destacados",
+    "featured_collection_ebwVhf"
   ]
 }
