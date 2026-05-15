@@ -52,10 +52,10 @@
       "type": "featured-collection",
       "name": "Carrusel de colección",
       "settings": {
-        "section_id": "tercera",
-        "label": "Productos",
-        "title": "Todos",
-        "collection": "",
+        "section_id": "preferidos",
+        "label": "Preferidos",
+        "title": "Lo que nos gusta",
+        "collection": "preferidos",
         "products_to_show": 15
       }
     }
